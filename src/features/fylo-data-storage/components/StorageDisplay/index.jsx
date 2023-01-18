@@ -9,10 +9,10 @@ const StorageDisplay = (props) => {
         <span>{from} GB</span>
         <span>{to} GB</span>
       </div>
-      <style jsx>
+      <style jsx="true">
         {`
           .progress-bar::before {
-            width: ${percent}%;
+            width: ${percent || 0}%;
           }
         `}
       </style>

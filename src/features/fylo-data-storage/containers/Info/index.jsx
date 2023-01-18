@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import DataBubble from "../../components/DataBubble";
 import StorageDisplay from "../../components/StorageDisplay";
-// import PropTypes from "prop-types";
 
-// Info.propTypes = {};
 function Info(props) {
   const { usedData } = props;
-  const [percentValue, setPercentValue] = useState(0);
-  const [from, setFrom] = useState(0);
-  const [to, setTo] = useState(100);
+  const currentPercent = useSelector((state) => state.fylo.currentPercent);
+
   useEffect(() => {
-    setPercentValue(50);
-    setFrom(0);
-    setTo(1000);
-  }, []);
+    console.log("currentPercent", currentPercent);
+  }, [currentPercent]);
+  const [from, setFrom] = useState(0);
+  const [to, setTo] = useState(1000);
+
   return (
     <div className="bottom">
       <p className="data-text">
-        You’ve used <span className="data">{usedData} GB</span> of your storage
+        You’ve used{" "}
+        <span className="data">{(currentPercent / 100) * to || 0} GB</span> of
+        your storage
       </p>
 
-      <StorageDisplay from={from} to={to} percent={percentValue} />
-      <DataBubble leftData={185} />
+      <StorageDisplay from={from} to={to} percent={currentPercent} />
+      <DataBubble leftData={to - (to / 100) * currentPercent} />
     </div>
   );
 }

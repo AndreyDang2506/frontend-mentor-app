@@ -5,7 +5,7 @@ function DataBubble(props) {
   return (
     <div className="data-bubble">
       <p className="data-bubble-text">
-        <span>{leftData}</span>
+        <span>{leftData || 0}</span>
         GB Left
       </p>
     </div>
